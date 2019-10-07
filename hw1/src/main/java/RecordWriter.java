@@ -1,13 +1,14 @@
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
 
 public class RecordWriter {
-    private String filePath = "/Users/nichantal/Desktop/DS6650/hw1/src/main/java/records32.csv";
+    private String filePath = "/Users/nichantal/Desktop/DS6650/hw1/src/main/java/records.csv";
     private final String SEPARATOR = ",";
-    private Queue<Record> records;
+    private BlockingQueue<Record> records;
     //private List<Long> responsesTime;
 
-    public RecordWriter(Queue<Record> records) {
+    public RecordWriter(BlockingQueue<Record> records) {
         this.records = records;
     }
 
@@ -47,7 +48,7 @@ public class RecordWriter {
 //        throughput = total number of requests/wall time
 //        p99 (99th percentile) response time. Here’s a nice article about why percentiles are important and why calculating them is not always easy.
 //        max response time
-        List<Long> responsesTime = new ArrayList<>();
+        List<Long> responsesTime = new ArrayList<>(records.size());
         long sum = 0;
         for (Record record : records) {
             responsesTime.add(record.getLatency());

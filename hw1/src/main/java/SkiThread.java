@@ -1,13 +1,9 @@
-
 import io.swagger.client.api.SkiersApi;
-
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 import io.swagger.client.*;
@@ -22,12 +18,13 @@ public class SkiThread extends java.lang.Thread implements Runnable {
     private int numOfPost;
     private String httpAddress;
     private static Logger logger = Logger.getLogger(SkiThread.class.getName());
-    private int successReq;
-    private Queue<Record> records;
+    private AtomicInteger successReq = new AtomicInteger();
+    private AtomicInteger failReq = new AtomicInteger();
+    private BlockingQueue<Record> records;
 
 
     public SkiThread(CountDownLatch startLatch, CountDownLatch endLatch, String httpAddress,
-                     int numOfPost, int[] skiIDRange, int[] liftIDRange, int[] timeRange, Queue<Record> records) {
+                     int numOfPost, int[] skiIDRange, int[] liftIDRange, int[] timeRange, BlockingQueue<Record> records) {
         this.startLatch = startLatch;
         this.endLatch = endLatch;
         this.numOfPost = numOfPost;
@@ -50,9 +47,10 @@ public class SkiThread extends java.lang.Thread implements Runnable {
             ApiResponse<Integer> resp = skiersApi.getSkierDayVerticalWithHttpInfo(56, "2019", "25", skiID);
             long latency = System.currentTimeMillis() - wallStart;
             if (resp.getStatusCode() / 100 == 2) {
-                successReq++;
+                successReq.incrementAndGet();
                 writeRecord(wallStart, "POST", latency, resp.getStatusCode());
             } else {
+                failReq.incrementAndGet();
                 logger.info("Request Fail With Status Code" + resp.getStatusCode());
             }
         } catch (Exception e){
@@ -86,12 +84,12 @@ public class SkiThread extends java.lang.Thread implements Runnable {
          return ThreadLocalRandom.current().nextInt(range[0], range[1]);
     }
 
-    public int getSuccessReq() {
+    public AtomicInteger getSuccessReq() {
         return successReq;
     }
 
-    public int getFailReq() {
-        return numOfPost - successReq;
+    public AtomicInteger getFailReq() {
+        return failReq;
     }
 
     public void writeRecord(long startTime, String reqType, long latency, int respCode) {

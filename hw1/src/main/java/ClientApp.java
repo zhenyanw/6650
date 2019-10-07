@@ -1,22 +1,18 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class ClientApp {
 
     private static Double div = 0.1;
     private static Double div8 = 0.8;
-    private static Queue<Record> concurrentRecordList = new ConcurrentLinkedQueue<>();
+    private static BlockingQueue<Record> concurrentRecordList = new ArrayBlockingQueue<Record>(400000);
 
     public static void main(String[] args) throws Exception {
         //String httpAdd = "http://localhost:8090/skiers/1/seasons/3/days/4/skiers/";
-//        Client client = new Client(32, 64, 40, 20, "52.23.187.172", "8080/hw1/");
-        List<SkiThread> phases = new ArrayList<>();
-        Client client = new Client(32, 20000, 40, 20, "localhost", "8090");
+        BlockingQueue<SkiThread> phases = new ArrayBlockingQueue<>(400);
+//        Client client = new Client(256, 20000, 40, 20, "52.23.187.172", "8090");
+        Client client = new Client(32, 20000, 40, 20, "52.23.187.172", "8080/hw1");
         System.out.println("Number of Threads To Run: " + client.getNumThreads());
         int p1Threads = client.getNumThreads() / 4;
         int p2Threads = client.getNumThreads();
@@ -90,24 +86,24 @@ public class ClientApp {
         RecordWriter csvWriter = new RecordWriter(concurrentRecordList);
         csvWriter.writeRecord();
         System.out.println("");
-        System.out.println("Throughput: " + totalReqs / totalWallTime);
+        System.out.println("Throughput: " + (float) totalReqs / totalWallTime);
         csvWriter.printRecord();
     }
 
 
 
-    private static int getSuccessReqs(List<SkiThread> phases) {
+    private static int getSuccessReqs(BlockingQueue<SkiThread> phases) {
         int total = 0;
         for (SkiThread phase : phases) {
-            total += phase.getSuccessReq();
+            total += phase.getSuccessReq().get();
         }
         return total;
     }
 
-    private static int getFailReqs(List<SkiThread> phases) {
+    private static int getFailReqs(BlockingQueue<SkiThread> phases) {
         int total = 0;
         for (SkiThread phase : phases) {
-            total += phase.getFailReq();
+            total += phase.getFailReq().get();
         }
         return total;
     }
