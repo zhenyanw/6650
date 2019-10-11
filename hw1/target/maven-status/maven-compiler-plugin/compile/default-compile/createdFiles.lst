@@ -1,7 +1,7 @@
-ClientApp.class
-SkiThread.class
-Client.class
-SkierServlet.class
-Record.class
-RecordWriter.class
-ResortServlet.class
+Part2/RecordWriter.class
+Part1/SkiThread.class
+Part1/ResortServlet.class
+Part1/SkierServlet.class
+Part2/Record.class
+Part1/ClientApp.class
+Part1/Client.class

@@ -6,12 +6,12 @@
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>SkierServlet</servlet-name>
-    <servlet-class>SkierServlet</servlet-class>
+    <servlet-class>Part1.SkierServlet</servlet-class>
   </servlet>
 
   <servlet>
     <servlet-name>ResortServlet</servlet-name>
-    <servlet-class>ResortServlet</servlet-class>
+    <servlet-class>Part1.ResortServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
