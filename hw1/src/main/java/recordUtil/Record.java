@@ -1,6 +1,4 @@
-package Part2;
-
-import java.util.List;
+package recordUtil;
 
 public class Record {
 

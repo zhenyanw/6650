@@ -1,4 +1,6 @@
-import Part2.Record;
+package Client;
+
+import recordUtil.Record;
 import io.swagger.client.api.SkiersApi;
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;

@@ -1,6 +1,4 @@
-package Part2;
-
-import Part2.Record;
+package recordUtil;
 
 import java.io.*;
 import java.util.*;

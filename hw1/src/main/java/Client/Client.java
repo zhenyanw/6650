@@ -1,3 +1,5 @@
+package Client;
+
 import javax.annotation.processing.Processor;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,7 +36,7 @@ public class Client {
     public Client(Integer numThreads, Integer numSkiers, Integer numLifts,
                   Integer numRuns, String ip, String port) throws Exception {
         if (!valid(numThreads, numSkiers, numLifts, numRuns)) {
-            throw new Exception("Invalid Input For Client");
+            throw new Exception("Invalid Input For Client.Client");
         }
         this.numThreads = numThreads;
         this.numSkiers = numSkiers;

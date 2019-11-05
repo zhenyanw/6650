@@ -1,5 +1,7 @@
-import Part2.Record;
-import Part2.RecordWriter;
+package Client;
+
+import recordUtil.Record;
+import recordUtil.RecordWriter;
 import java.util.concurrent.*;
 
 
@@ -11,7 +13,7 @@ public class ClientApp {
 
     public static void main(String[] args) throws Exception {
         BlockingQueue<SkiThread> phases = new ArrayBlockingQueue<>(3000);
-        //Client client = new Client(256, 20000, 40, 20, "3.84.125.125", "8080/hw1");
+        //Client.Client client = new Client.Client(256, 20000, 40, 20, "3.84.125.125", "8080/hw1");
         Client client = new Client(256, 20000, 40, 20, "localhost", "8090");
         System.out.println("Number of Threads To Run: " + client.getNumThreads());
         int p1Threads = client.getNumThreads() / 4;
