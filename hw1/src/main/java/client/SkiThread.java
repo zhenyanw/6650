@@ -1,4 +1,4 @@
-package Client;
+package client;
 
 import recordUtil.Record;
 import io.swagger.client.api.SkiersApi;

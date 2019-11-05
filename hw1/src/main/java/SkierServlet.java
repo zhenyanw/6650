@@ -91,11 +91,11 @@ public class SkierServlet extends HttpServlet {
             Integer skierId = Integer.valueOf(urlParts[7]);
             try {
                 long wallStart = System.currentTimeMillis();
-                //Integer vertical = userService.getVertical(resortId, seasonId, dayId, skierId);
+                Integer vertical = userService.getVertical(resortId, seasonId, dayId, skierId);
                 long latency = System.currentTimeMillis() - wallStart;;
-                //statQueueService.enqueue(new Statistic("/{resortID}/seasons/{seasonID}/days/{dayID}/skiers/{skierID}", "GET", latency, latency));
-                //String jsonString = new Gson().toJson("vertical is:" + vertical);
-//                out.write(jsonString);
+                statQueueService.enqueue(new Statistic("/{resortID}/seasons/{seasonID}/days/{dayID}/skiers/{skierID}", "GET", latency));
+                String jsonString = new Gson().toJson("vertical is:" + vertical);
+                out.write(jsonString);
             } catch (Exception e) {
                 e.printStackTrace();
             }

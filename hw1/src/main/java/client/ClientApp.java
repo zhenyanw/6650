@@ -1,4 +1,4 @@
-package Client;
+package client;
 
 import recordUtil.Record;
 import recordUtil.RecordWriter;
