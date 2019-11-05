@@ -6,12 +6,17 @@
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>SkierServlet</servlet-name>
-    <servlet-class>Part1.SkierServlet</servlet-class>
+    <servlet-class>SkierServlet</servlet-class>
   </servlet>
 
   <servlet>
     <servlet-name>ResortServlet</servlet-name>
-    <servlet-class>Part1.ResortServlet</servlet-class>
+    <servlet-class>ResortServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>StatisticsServlet</servlet-name>
+    <servlet-class>StatisticsServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -22,5 +27,10 @@
   <servlet-mapping>
     <servlet-name>SkierServlet</servlet-name>
     <url-pattern>/skiers/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>StatisticsServlet</servlet-name>
+    <url-pattern>/statistics/*</url-pattern>
   </servlet-mapping>
 </web-app>

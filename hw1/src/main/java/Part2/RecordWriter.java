@@ -47,11 +47,6 @@ public class RecordWriter {
     }
 
     public void printRecord() {
-//        mean response time (millisecs)
-//        median response time (millisecs)
-//        throughput = total number of requests/wall time
-//        p99 (99th percentile) response time. Here’s a nice article about why percentiles are important and why calculating them is not always easy.
-//        max response time
         List<Long> responsesTime = new ArrayList<>(records.size());
         long sum = 0;
         for (Record record : records) {
