@@ -14,7 +14,8 @@ public class ClientApp {
     public static void main(String[] args) throws Exception {
         BlockingQueue<SkiThread> phases = new ArrayBlockingQueue<>(3000);
         //Client.Client client = new Client.Client(256, 20000, 40, 20, "3.84.125.125", "8080/hw1");
-        Client client = new Client(256, 20000, 40, 20, "localhost", "8090");
+        //Client client = new Client(256, 20000, 40, 20, "localhost", "8090");
+        Client client = new Client(256, 20000, 40, 20, "https://6650.appspot.com");
         System.out.println("Number of Threads To Run: " + client.getNumThreads());
         int p1Threads = client.getNumThreads() / 4;
         int p2Threads = client.getNumThreads();

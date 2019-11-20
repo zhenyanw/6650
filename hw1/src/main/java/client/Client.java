@@ -27,7 +27,7 @@ public class Client {
     private Integer successReq;
 
     public Client(Integer numThreads, Integer numSkiers, Integer numLifts,
-                  Integer numRuns, String ip, String port) throws Exception {
+                  Integer numRuns, String addr) throws Exception {
         if (!valid(numThreads, numSkiers, numLifts, numRuns)) {
             throw new Exception("Invalid Input For Client.Client");
         }
@@ -35,11 +35,11 @@ public class Client {
         this.numSkiers = numSkiers;
         this.numLifts = numLifts;
         this.numRuns = numRuns;
-        this.httpAdd = "http://" + ip + ":" + port;
+        this.httpAdd = addr;
     }
 
-    public Client(Integer numThreads, Integer numSkiers, String ip, String port) throws Exception {
-        this(numThreads, numSkiers, DEFLIFT, DEFRUN, ip, port);
+    public Client(Integer numThreads, Integer numSkiers, String addr) throws Exception {
+        this(numThreads, numSkiers, DEFLIFT, DEFRUN, addr);
     }
 
 

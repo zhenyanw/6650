@@ -58,7 +58,7 @@ public class SkierServlet extends HttpServlet {
                 long wallStart = System.currentTimeMillis();
                 queueService.enqueue(ride);
                 long latency = System.currentTimeMillis() - wallStart;;
-                statQueueService.enqueue(new Statistic("/{resortID}/seasons/{seasonID}/days/{dayID}/skiers/{skierID}", "POST", latency));
+                //statQueueService.enqueue(new Statistic("/{resortID}/seasons/{seasonID}/days/{dayID}/skiers/{skierID}", "POST", latency));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -93,9 +93,9 @@ public class SkierServlet extends HttpServlet {
                 long wallStart = System.currentTimeMillis();
                 Integer vertical = userService.getVertical(resortId, seasonId, dayId, skierId);
                 long latency = System.currentTimeMillis() - wallStart;;
-                statQueueService.enqueue(new Statistic("/{resortID}/seasons/{seasonID}/days/{dayID}/skiers/{skierID}", "GET", latency));
-                String jsonString = new Gson().toJson("vertical is:" + vertical);
-                out.write(jsonString);
+                //statQueueService.enqueue(new Statistic("/{resortID}/seasons/{seasonID}/days/{dayID}/skiers/{skierID}", "GET", latency));
+                //String jsonString = new Gson().toJson("vertical is:" + vertical);
+                //out.write(jsonString);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -114,9 +114,9 @@ public class SkierServlet extends HttpServlet {
                 long wallStart = System.currentTimeMillis();
                 skierVertical = userService.getTotalVertical(skierId, resortId, seasonId);
                 long latency = System.currentTimeMillis() - wallStart;
-                statQueueService.enqueue(new Statistic("/{skierID}/vertical", "GET", latency));
-                String jsonString = new Gson().toJson("vertical is:" + skierVertical);
-                out.write(jsonString);
+                //statQueueService.enqueue(new Statistic("/{skierID}/vertical", "GET", latency));
+                //String jsonString = new Gson().toJson("vertical is:" + skierVertical);
+                //out.write(jsonString);
             } catch (Exception e) {
                 e.printStackTrace();
             }
